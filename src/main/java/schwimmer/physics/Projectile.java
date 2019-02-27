@@ -20,8 +20,8 @@ public class Projectile {
     }
 
     public double getY() {
-        return Math.sin(Math.toRadians(degrees)) * velocity * time
-                - 9.8 * 0.5 * time * time;
+        return (Math.sin(Math.toRadians(degrees)) * velocity * time)
+                - (9.8 * 0.5 * time * time);
     }
 
     @Override
