@@ -24,16 +24,12 @@ public class Dictionary {
         return list.contains(word.toUpperCase());
     }
 
-    public boolean isPalindrome(String word) {
-        return false;
-    }
-
-    public List<String> getPalindromes() {
-        return null;
-    }
-
     public int size() {
-        return 0;
+        return list.size();
+    }
+
+    public List<String> getList() {
+        return list;
     }
 
 }
