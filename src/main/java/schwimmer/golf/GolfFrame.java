@@ -15,26 +15,8 @@ public class GolfFrame extends JFrame {
         JPanel root = new JPanel();
         root.setLayout(new BorderLayout());
 
-        JLabel north = new JLabel(new ImageIcon("spiked-dragon-head.png"));
-        root.add(north, BorderLayout.NORTH);
-
-        JLabel south = new JLabel("SOUTH");
-        south.setBackground(Color.MAGENTA);
-        south.setOpaque(true);
-        root.add(south, BorderLayout.SOUTH);
-
-        JLabel west = new JLabel("WEST");
-        west.setBackground(Color.cyan);
-        west.setOpaque(true);
-        root.add(west, BorderLayout.WEST);
-
-        JButton center = new JButton("CENTER");
-        center.setBackground(Color.LIGHT_GRAY);
-        center.setOpaque(true);
-
-        center.addActionListener(this::printClick);
-
-        root.add(center, BorderLayout.CENTER);
+        GolfCourseComponent golfCourseComponent = new GolfCourseComponent();
+        root.add(golfCourseComponent, BorderLayout.CENTER);
 
         setContentPane(root);
     }
