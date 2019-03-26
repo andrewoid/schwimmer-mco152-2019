@@ -1,5 +1,7 @@
 package schwimmer.golf;
 
+import schwimmer.physics.Projectile;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,7 +14,7 @@ public class GolfCourseComponent extends JComponent {
     private static final int POLE_HEIGHT = 100;
     private static final int FLAG_WIDTH = 26;
 
-    private double x = 0.0;
+    private Projectile golfball = new Projectile(80, 72);
 
     @Override
     protected void paintComponent(Graphics graphics) {
@@ -38,15 +40,14 @@ public class GolfCourseComponent extends JComponent {
 
         // Draw Ball
         graphics.setColor(Color.WHITE);
-        graphics.fillOval((int) (BALL_START_X+x),
-                groundHeight-BALL_WIDTH,
+        graphics.fillOval((int) (BALL_START_X + golfball.getX()),
+                (int) (groundHeight - BALL_WIDTH - golfball.getY()),
                 BALL_WIDTH,
                 BALL_WIDTH);
-        x+=0.1;
 
         // Draw Flagpole
         graphics.setColor(Color.BLACK);
-        int flagY = groundHeight- POLE_HEIGHT;
+        int flagY = groundHeight - POLE_HEIGHT;
         graphics.fillRect(FLAG_X,
                 flagY,
                 POLE_WIDTH,
@@ -56,10 +57,11 @@ public class GolfCourseComponent extends JComponent {
         graphics.setColor(Color.RED);
         Polygon polygon = new Polygon();
         polygon.addPoint(FLAG_X, flagY);
-        polygon.addPoint(FLAG_X, flagY+FLAG_WIDTH);
-        polygon.addPoint(FLAG_X-FLAG_WIDTH, flagY+FLAG_WIDTH/2);
+        polygon.addPoint(FLAG_X, flagY + FLAG_WIDTH);
+        polygon.addPoint(FLAG_X - FLAG_WIDTH, flagY + FLAG_WIDTH / 2);
         graphics.fillPolygon(polygon);
 
+        golfball.addTime(0.01);
         repaint();
     }
 }
