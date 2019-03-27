@@ -1,5 +1,7 @@
 package schwimmer.golf;
 
+import schwimmer.physics.Projectile;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,6 +19,25 @@ public class GolfFrame extends JFrame {
 
         GolfCourseComponent golfCourseComponent = new GolfCourseComponent();
         root.add(golfCourseComponent, BorderLayout.CENTER);
+
+        JPanel controlPanel = new JPanel();
+        controlPanel.add(new JLabel("Velocity"));
+        JTextField velocityField = new JTextField();
+        velocityField.setColumns(4);
+        controlPanel.add(velocityField);
+        controlPanel.add(new JLabel("Angle"));
+        JTextField angleField = new JTextField();
+        angleField.setColumns(4);
+        controlPanel.add(angleField);
+        JButton swingButton = new JButton("SWING!");
+        controlPanel.add(swingButton);
+        swingButton.addActionListener(event -> {
+            Projectile projectile = new Projectile(
+                    Double.parseDouble(velocityField.getText()),
+                    Double.parseDouble(angleField.getText()));
+            golfCourseComponent.setGolfball(projectile);
+        });
+        root.add(controlPanel, BorderLayout.SOUTH);
 
         setContentPane(root);
     }

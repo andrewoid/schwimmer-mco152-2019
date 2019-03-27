@@ -64,4 +64,8 @@ public class GolfCourseComponent extends JComponent {
         golfball.addTime(0.01);
         repaint();
     }
+
+    public void setGolfball(Projectile golfball) {
+        this.golfball = golfball;
+    }
 }
