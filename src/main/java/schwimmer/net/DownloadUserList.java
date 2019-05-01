@@ -2,6 +2,7 @@ package schwimmer.net;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -20,7 +21,14 @@ public class DownloadUserList {
                 .build();
         JsonPlaceholderAPI api = retrofit.create(JsonPlaceholderAPI.class);
 
-        Disposable disposable = api.getPhotoList().subscribe(System.out::println);
+        Disposable disposable = api.getPhotoList().subscribe(
+                new Consumer<PhotoList>() {
+                    @Override
+                    public void accept(PhotoList photos) throws Exception {
+                        System.out.println(photos);
+                    }
+                }
+        );
     }
 
 }
