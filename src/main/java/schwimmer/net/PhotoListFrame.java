@@ -1,6 +1,8 @@
 package schwimmer.net;
 
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import org.apache.commons.lang3.time.StopWatch;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,11 +56,17 @@ public class PhotoListFrame extends JFrame {
         setContentPane(root);
 
         JsonPlaceholderClient client = new JsonPlaceholderClient();
+        StopWatch stopwatch = new StopWatch();
+        stopwatch.start();
         disposable = client.getPhotoList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.trampoline())
                 .subscribe(photos -> {
                     photoList = photos;
                     setPhoto(photos.get(0));
                 });
+        stopwatch.stop();
+        System.out.println(stopwatch.getTime());
 
         addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent e) {
